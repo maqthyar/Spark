@@ -1,4 +1,4 @@
-Year,First Name,County,Sex,Count
+Year,First_Name,County,Sex,Count
 2016,DAVID,Kings,M,231
 2016,JACOB,Kings,M,228
 2016,ETHAN,Queens,M,224
@@ -14,7 +14,6 @@ msi,NOAH,Kings,M,184
 2016,RACHEL,Kings,F,179
 2016,AIDEN,Queens,M,177
 2016,MATTHEW,Queens,M,176
-2016,NOAH,Queens,M,175
 2016,SARAH,Kings,F,174
 2016,EMMA,Queens,F,171
 2016,LEAH,Kings,F,170

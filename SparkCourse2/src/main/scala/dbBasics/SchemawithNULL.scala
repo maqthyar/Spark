@@ -31,7 +31,7 @@ object SchemawithNULL {
     namesDf.show()
 
     val ownSchema = StructType(
-      StructField("year", IntegerType, false) ::
+      StructField("year", StringType, false) ::
         StructField("first_name", StringType, true) ::
         StructField("Country", StringType, true) ::
         StructField("Sex", StringType, true) ::
