@@ -1,8 +1,10 @@
 package example
 
+import com.amazon.deequ.VerificationResult.checkResultsAsDataFrame
+import com.amazon.deequ.{VerificationResult, VerificationSuite}
 import org.apache.spark
 import com.amazon.deequ.suggestions.{ConstraintSuggestionRunner, Rules}
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{SaveMode, SparkSession}
 
 
 object ConstraintSuggestions {
@@ -38,6 +40,13 @@ object ConstraintSuggestions {
           (column, constraint.description, constraint.codeForConstraint)
         }
     }.toSeq.toDS()
+
+    suggestionDataFrame.coalesce(1)
+      .write.format("com.databricks.spark.csv")
+      .mode(SaveMode.Overwrite)
+      .option("header", "true")
+      .save("src/main/resources/output")
+
 
   }
 }
