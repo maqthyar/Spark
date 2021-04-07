@@ -5,6 +5,7 @@ import com.amazon.deequ.{VerificationResult, VerificationSuite}
 import com.amazon.deequ.VerificationResult.checkResultsAsDataFrame
 import com.amazon.deequ.checks.{Check, CheckLevel}
 import com.amazon.deequ.constraints.ConstrainableDataTypes
+import org.apache.spark.sql.types.DoubleType
 import org.apache.spark.sql.{SaveMode, SparkSession}
 
 object Constraints {
@@ -25,9 +26,17 @@ object Constraints {
 
     val df = spark.read
       .option("header", "true")
+      .option("inferschema", "true")
       .csv(file)
 
+
     val _check = Check(CheckLevel.Error, "Data Validation Check")
+      .isComplete("Emp ID")
+      .isUnique("Emp ID")
+      .isNonNegative("Age_in_Yrs")
+      .isContainedIn("Quarter of Joining", Array("Q1","Q2","Q3","Q4"))
+      .hasMax("Month of Joining", _ == 12)
+      .isNonNegative("Weight_in_Kgs")
       .isComplete("First Name")
       .isComplete("Month Name of Joining")
       .isContainedIn("Month Name of Joining", Array("August", "July", "January", "April", "December", "November", "February", "March", "June", "September", "May", "October"))
